@@ -4,19 +4,17 @@ import 'package:app2/features/home/widgets/container_sellar.dart';
 import 'package:app2/features/home/widgets/slideranimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeViewBody extends StatefulWidget {
-  const HomeViewBody({Key? key}) : super(key: key);
+  final String namexx;
+  const HomeViewBody({Key? key, required this.namexx}) : super(key: key);
 
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-
-  
   @override
   void initState() {
     context.read<HomeCubit>().getHomeData();
@@ -28,7 +26,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: customAppBar("Ahmed"),
+      appBar: customAppBar(widget.namexx),
       body: Column(
         children: [
           Expanded(
@@ -56,7 +54,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           ),
         ],
       ),
-    
     );
   }
 
@@ -68,10 +65,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
+              overflow: TextOverflow.ellipsis,
               "Welcome, $name",
               style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -140,7 +138,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           ),
         );
       } else if (state is HomeError) {
-        return  Center(child: Text("error+ ${state.errorMessage}"));
+        return Center(child: Text("error+ ${state.errorMessage}"));
       } else {
         return const Center(child: CircularProgressIndicator());
       }
@@ -186,7 +184,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       Center(
                         child: Text(
                           y.name,
-                          style: const TextStyle(color: Colors.amber, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.amber, fontSize: 20),
                         ),
                       ),
                     ],
@@ -197,7 +196,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           ),
         );
       } else if (state is ParappError) {
-       return  Center(child: Text("error+ ${state.errorMessage}"));
+        return Center(child: Text("error+ ${state.errorMessage}"));
       } else {
         return const Center(child: CircularProgressIndicator());
       }

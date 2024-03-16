@@ -1,5 +1,5 @@
 import 'package:app2/core/theme.dart';
-import 'package:app2/features/home/screens/themess.dart';
+import 'package:app2/features/themes/themess.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +40,12 @@ class Profile extends StatelessWidget {
                   color: Colors.blue.shade900,
                   size: 30,
                 )),
-            text: 'Edit Profile'),
+            text: 'Edit Profile',
+            onTab: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const Themespages();
+              }));
+            }),
         bodyconatiner(
             iconss: IconButton(
                 onPressed: () {},
@@ -49,20 +54,18 @@ class Profile extends StatelessWidget {
                   color: Colors.blue.shade900,
                   size: 30,
                 )),
-            text: 'Edit Profile'),
+            text: 'Edit Profile',
+            onTab: () {}),
         bodyconatiner(
             iconss: IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const Themespages();
-                  }));
-                },
+                onPressed: () {},
                 icon: Icon(
                   Icons.favorite_outline,
                   color: Colors.blue.shade900,
                   size: 30,
                 )),
-            text: 'Edit Profile'),
+            text: 'Edit Profile',
+            onTab: () {}),
         bodyconatiner(
             iconss: IconButton(
                 onPressed: () {},
@@ -71,14 +74,13 @@ class Profile extends StatelessWidget {
                   color: Colors.blue.shade900,
                   size: 30,
                 )),
-            text: 'Edit Profile'),
+            text: 'Edit Profile',
+            onTab: () {}),
         const SizedBox(
           height: 10,
         ),
         GestureDetector(
-          onTap: () {
-            print('object');
-          },
+          onTap: () {},
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(
               Icons.exit_to_app,
@@ -99,51 +101,59 @@ class Profile extends StatelessWidget {
   }
 }
 
-Widget bodyconatiner({required IconButton iconss, required String text}) {
+Widget bodyconatiner(
+    {required IconButton iconss,
+    required String text,
+    required Function onTab}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: Container(
-      height: 80,
-      width: 380,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Color(0xfff3e9f6),
-      ),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: iconss,
+    child: GestureDetector(
+      onTap: () {
+        onTab();
+      },
+      child: Container(
+        height: 80,
+        width: 380,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Color(0xfff3e9f6),
         ),
-        const Spacer(
-          flex: 1,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-              color: Colors.blue.shade900,
-              fontSize: 20,
-              fontWeight: FontWeight.bold),
-        ),
-        const Spacer(
-          flex: 15,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 40,
-            width: 40,
-            decoration: const BoxDecoration(
-              color: Color(0xffcaaada),
-              borderRadius: BorderRadius.all(Radius.circular(40)),
-            ),
-            child: Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: Colors.blue.shade900,
-              size: 20,
-            ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: iconss,
           ),
-        )
-      ]),
+          const Spacer(
+            flex: 1,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+                color: Colors.blue.shade900,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
+          const Spacer(
+            flex: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: const BoxDecoration(
+                color: Color(0xffcaaada),
+                borderRadius: BorderRadius.all(Radius.circular(40)),
+              ),
+              child: Icon(
+                Icons.arrow_forward_ios_outlined,
+                color: Colors.blue.shade900,
+                size: 20,
+              ),
+            ),
+          )
+        ]),
+      ),
     ),
   );
 }

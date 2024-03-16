@@ -1,37 +1,46 @@
-import 'package:app2/core/theme.dart';
-import 'package:app2/features/home/screens/profile.dart';
-import 'package:app2/features/search/search.dart';
-import 'package:app2/features/home/widgets/home_view_body.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:app2/features/home/screens/profile.dart';
+import 'package:app2/features/search/search.dart';
+
+import '../widgets/home_view_body.dart';
+
 class HomeView extends StatefulWidget {
+  final String namexx;
+
+  const HomeView({
+    Key? key,
+    required this.namexx,
+  }) : super(key: key);
+
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
-int clisks = 0;
-List<Widget> screens = [
-  const HomeViewBody(),
-  const Search(),
-  const Profile(),
-];
-
 class _HomeViewState extends State<HomeView> {
+  int clisks = 0;
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      HomeViewBody(namexx: widget.namexx),
+      const Search(),
+      const Profile(),
+    ];
+
     return SafeArea(
       child: Scaffold(
-        body: screens[clisks],
+        body: screens[clisks], // استخدام الشاشة المحددة من القائمة
         bottomNavigationBar: BottomNavigationBar(
           mouseCursor: SystemMouseCursors.grab,
           selectedFontSize: 12.sp,
-          selectedIconTheme: IconThemeData(color: Colors.blue, size: 22.sp),
+          selectedIconTheme: const IconThemeData(color: Colors.blue, size: 22),
           selectedItemColor: Colors.blue,
-          selectedLabelStyle:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: 12.sp),
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
           currentIndex: clisks,
           type: BottomNavigationBarType.fixed,
           enableFeedback: true,
@@ -40,9 +49,7 @@ class _HomeViewState extends State<HomeView> {
               clisks = index; // تحديث الصفحة المحددة
             });
           },
-          backgroundColor: Provider.of<ThemeProvider>(context, listen: false)
-              .currentTheme
-              .primaryColor,
+          backgroundColor: Colors.white,
           elevation: 1,
           items: const [
             BottomNavigationBarItem(

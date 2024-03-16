@@ -17,7 +17,7 @@ class Themespages extends StatelessWidget {
           
             Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
           },
-          child: Text('Toggle Theme'),
+          child: const Text('Toggle Theme'),
         ),
       ),
     );
